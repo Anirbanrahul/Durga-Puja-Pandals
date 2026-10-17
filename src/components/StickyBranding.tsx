@@ -35,7 +35,8 @@ export default function StickyBranding({
         </div>
 
         <div className="flex items-center gap-1.5">
-          <span className="text-slate-400">Designed &amp; Developed by</span>
+          <span className="text-slate-400 hidden sm:inline">Designed &amp; Developed by</span>
+          <span className="text-slate-400 sm:hidden">By</span>
           <span className="px-2 py-0.5 rounded-md bg-gradient-to-r from-amber-500/20 to-rose-600/20 border border-amber-500/40 text-amber-300 font-bold tracking-wide shadow-sm">
             Anirban Sarkar
           </span>

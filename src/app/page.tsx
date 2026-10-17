@@ -344,51 +344,54 @@ function PujoParikramaApp() {
         <SplashLoader onComplete={() => setShowSplash(false)} minDuration={2000} />
       )}
 
-      {/* 1. Header Bar */}
-      <header className="bg-slate-950 border-b border-amber-500/20 px-3 sm:px-6 py-2.5 flex items-center justify-between shrink-0 z-30 shadow-md">
-        <div className="flex items-center gap-2.5 min-w-0">
-          {/* Logo */}
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-600 to-red-700 p-0.5 flex items-center justify-center shadow-lg shadow-rose-900/40 shrink-0">
-            <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-              <span className="text-amber-400 font-bold text-sm tracking-wider">🕉️</span>
+      {/* 1. Header Bar: Responsive Mobile-First Multi-Line Layout */}
+      <header className="bg-slate-950 border-b border-amber-500/20 px-3 sm:px-6 py-2 shrink-0 z-30 shadow-md">
+        {/* Main Row: Logo, Title, and Emergency SOS */}
+        <div className="flex items-center justify-between gap-2">
+          {/* Logo & Main Title */}
+          <div className="flex items-center gap-2 min-w-0">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-600 to-red-700 p-0.5 flex items-center justify-center shadow-lg shadow-rose-900/40 shrink-0">
+              <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+                <span className="text-amber-400 font-bold text-xs sm:text-sm tracking-wider">🕉️</span>
+              </div>
+            </div>
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5">
+                <h1 className="text-sm sm:text-base font-extrabold tracking-tight text-white truncate">
+                  <span>Pujo Parikrama</span>
+                  <span className="text-amber-400 font-semibold text-xs ml-1 hidden xs:inline">&amp; Companion</span>
+                </h1>
+                {!isOnline && (
+                  <span className="text-[9px] bg-amber-500/20 text-amber-300 px-1.5 py-0.2 rounded font-mono flex items-center gap-1 border border-amber-500/30 shrink-0">
+                    <WifiOff className="w-2.5 h-2.5 text-amber-400" />
+                    Offline
+                  </span>
+                )}
+              </div>
             </div>
           </div>
-          <div className="min-w-0">
-            <div className="flex items-center gap-1.5 flex-wrap">
-              <h1 className="text-sm sm:text-base font-extrabold tracking-tight text-white flex items-center gap-1 truncate">
-                <span>Pujo Parikrama</span>
-                <span className="text-amber-400 font-semibold text-xs">&amp; Companion</span>
-              </h1>
-              {/* Creator Sticky Badge */}
-              <StickyBranding variant="badge" className="hidden sm:inline-flex" />
 
-              {!isOnline && (
-                <span className="text-[10px] bg-amber-500/20 text-amber-300 px-1.5 py-0.2 rounded font-mono flex items-center gap-1 border border-amber-500/30">
-                  <WifiOff className="w-2.5 h-2.5 text-amber-400" />
-                  Offline Ready
-                </span>
-              )}
-            </div>
-            <p className="text-[11px] text-slate-400 font-medium hidden md:block truncate">
-              Kolkata Durga Puja Guide • Pandals, Food, Washrooms &amp; Hospitals
-            </p>
+          {/* Desktop Only Badges (Hidden on mobile to keep top row clean) */}
+          <div className="hidden md:flex items-center gap-2">
+            <PujoTithiBadge />
+            <StickyBranding variant="badge" />
           </div>
-        </div>
 
-        {/* Header Right: Pujo Tithi Badge (Running Day) & Emergency SOS Button */}
-        <div className="flex items-center gap-2 shrink-0">
-          {/* Pujo Tithi Live Status (e.g., Sasthi / Saptami Running) */}
-          <PujoTithiBadge />
-
-          {/* SOS Emergency Button */}
+          {/* SOS Emergency Button (Always prominent and accessible) */}
           <button
             onClick={() => setIsEmergencyModalOpen(true)}
-            className="py-1.5 px-3 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-extrabold text-xs flex items-center gap-1.5 shadow-lg shadow-red-900/50 transition-all active:scale-95 border border-red-400/50 animate-pulse"
+            className="py-1.5 px-3 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-extrabold text-xs flex items-center gap-1.5 shadow-md shadow-red-900/50 transition-all active:scale-95 border border-red-400/50 animate-pulse shrink-0"
             title="Open Emergency Offline Helplines & SOS"
           >
-            <ShieldAlert className="w-4 h-4 text-white" />
-            <span className="hidden xs:inline">SOS</span>
+            <ShieldAlert className="w-3.5 h-3.5 text-white" />
+            <span>SOS Help</span>
           </button>
+        </div>
+
+        {/* Mobile Next Line: Pujo Tithi Live Status & Creator Badge (Takes NO space from main header) */}
+        <div className="md:hidden flex items-center justify-between gap-2 pt-1.5 mt-1.5 border-t border-slate-900">
+          <PujoTithiBadge />
+          <StickyBranding variant="badge" />
         </div>
       </header>
 

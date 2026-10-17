@@ -14,24 +14,22 @@ export default function PujoTithiBadge({ className = '' }: PujoTithiBadgeProps) 
 
   return (
     <>
-      {/* Corner Small Live Tithi Badge */}
+      {/* Corner / Sub-header Live Tithi Badge */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`group flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gradient-to-r from-rose-950/80 via-slate-900 to-amber-950/80 border border-amber-500/40 hover:border-amber-400 text-left transition-all active:scale-95 shadow-md shadow-rose-950/50 cursor-pointer ${className}`}
+        className={`group flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gradient-to-r from-rose-950/90 via-slate-900 to-amber-950/90 border border-amber-500/40 hover:border-amber-400 text-left transition-all active:scale-95 shadow-md shadow-rose-950/50 cursor-pointer ${className}`}
         title="Click to view full Durga Puja Tithi schedule & Sandhi Puja timing"
       >
         <div className="w-2 h-2 rounded-full bg-amber-400 animate-ping shrink-0" />
-        <div className="flex flex-col leading-tight">
-          <div className="flex items-center gap-1">
-            <span className="text-[10px] font-extrabold text-amber-300 uppercase tracking-wider">
-              {activeTithi.dayName}
-            </span>
-            <span className="text-[9px] px-1 py-0.1 rounded bg-rose-600/40 text-rose-300 font-bold">
-              Running
-            </span>
-          </div>
-          <span className="text-[10px] font-medium text-amber-200/90 hidden xs:inline">
-            {activeTithi.bengaliName} • Schedule 📅
+        <div className="flex items-center gap-1.5 leading-tight flex-wrap">
+          <span className="text-[11px] font-extrabold text-amber-300 uppercase tracking-wider">
+            {activeTithi.dayName}
+          </span>
+          <span className="text-[9px] px-1.5 py-0.2 rounded bg-rose-600/40 text-rose-300 font-bold">
+            Running
+          </span>
+          <span className="text-[10px] font-medium text-amber-200/90">
+            ({activeTithi.bengaliName}) • 📅
           </span>
         </div>
       </button>
