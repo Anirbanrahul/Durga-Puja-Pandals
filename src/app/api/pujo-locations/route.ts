@@ -21,6 +21,32 @@ async function getFallbackDataset() {
   }
 }
 
+function sanitizeKmlProperties(props: Record<string, unknown> | null | undefined): Record<string, unknown> {
+  if (!props || typeof props !== 'object') return {};
+  const cleaned: Record<string, unknown> = {};
+
+  for (const [key, val] of Object.entries(props)) {
+    if (val === null || val === undefined) continue;
+
+    if (typeof val === 'string' || typeof val === 'number' || typeof val === 'boolean') {
+      cleaned[key] = val;
+    } else if (Array.isArray(val)) {
+      cleaned[key] = val;
+    } else if (typeof val === 'object') {
+      const obj = val as Record<string, unknown>;
+      if ('value' in obj && typeof obj.value === 'string') {
+        cleaned[key] = obj.value.replace(/<[^>]*>?/gm, '').trim();
+      } else if ('#text' in obj && typeof obj['#text'] === 'string') {
+        cleaned[key] = obj['#text'].trim();
+      } else {
+        cleaned[key] = String(obj.value || '');
+      }
+    }
+  }
+
+  return cleaned;
+}
+
 export async function GET() {
   try {
     // Attempt to follow redirect and fetch KML from Google MyMaps with a 3.5s timeout
@@ -51,12 +77,23 @@ export async function GET() {
         const geoJson = toGeoJSON.kml(xmlDoc);
 
         if (geoJson && geoJson.features && geoJson.features.length > 0) {
-          return NextResponse.json(geoJson, {
-            headers: {
-              'x-data-source': 'google-mymaps-live',
-              'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+          const sanitizedFeatures = geoJson.features.map((feat) => ({
+            ...feat,
+            properties: sanitizeKmlProperties(feat.properties),
+          }));
+
+          return NextResponse.json(
+            {
+              ...geoJson,
+              features: sanitizedFeatures,
             },
-          });
+            {
+              headers: {
+                'x-data-source': 'google-mymaps-live',
+                'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+              },
+            }
+          );
         }
       }
     }

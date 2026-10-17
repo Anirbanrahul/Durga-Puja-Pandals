@@ -11,6 +11,7 @@ import {
 import {
   haversineDistance,
   DEFAULT_KOLKATA_COORDS,
+  safeString,
 } from '@/lib/geoUtils';
 import LocationControlBar from '@/components/LocationControlBar';
 import PandalList from '@/components/PandalList';
@@ -159,22 +160,22 @@ function PujoParikramaApp() {
         const dist = haversineDistance(userLocation.lat, userLocation.lng, lat, lng);
 
         const name =
-          (props.name as string) ||
-          (props.Name as string) ||
-          (props.title as string) ||
+          safeString(props.name) ||
+          safeString(props.Name) ||
+          safeString(props.title) ||
           `Durga Puja Pandal #${index + 1}`;
 
         const desc =
-          (props.description as string) ||
-          (props.Description as string) ||
-          (props.desc as string) ||
+          safeString(props.description) ||
+          safeString(props.Description) ||
+          safeString(props.desc) ||
           'Historic community Durga Puja celebrations with traditional rites and festive artistry.';
 
-        const zone = (props.zone as string) || 'Kolkata';
-        const nearestMetro = props.nearestMetro as string | undefined;
-        const famousFor = props.famousFor as string | undefined;
-        const category = props.category as Pandal['category'];
-        const address = props.address as string | undefined;
+        const zone = safeString(props.zone, 'Kolkata');
+        const nearestMetro = safeString(props.nearestMetro) || undefined;
+        const famousFor = safeString(props.famousFor) || undefined;
+        const category = (safeString(props.category) as Pandal['category']) || undefined;
+        const address = safeString(props.address) || undefined;
 
         return {
           id: (props.id as string) || `pandal-${index}`,

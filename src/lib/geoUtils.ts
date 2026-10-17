@@ -177,9 +177,32 @@ export function generateSosMessage(lat: number, lng: number): string {
 }
 
 /**
+ * Safely extracts a plain string from arbitrary values, KML XML nodes, or {@type, value} objects
+ */
+export function safeString(val: unknown, fallback: string = ''): string {
+  if (val === null || val === undefined) return fallback;
+  if (typeof val === 'string') return val.trim();
+  if (typeof val === 'number' || typeof val === 'boolean') return String(val);
+  if (typeof val === 'object') {
+    const obj = val as Record<string, unknown>;
+    if ('value' in obj && typeof obj.value === 'string') {
+      return obj.value.replace(/<[^>]*>?/gm, '').trim() || fallback;
+    }
+    if ('#text' in obj && typeof obj['#text'] === 'string') {
+      return obj['#text'].trim() || fallback;
+    }
+    if (Array.isArray(val)) {
+      return val.map((item) => safeString(item)).filter(Boolean).join(', ') || fallback;
+    }
+  }
+  return fallback;
+}
+
+/**
  * Default central Kolkata coordinates (Esplanade / Park Street area)
  */
 export const DEFAULT_KOLKATA_COORDS: LocationCoords = {
   lat: 22.5626,
   lng: 88.3518,
 };
+
