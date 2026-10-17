@@ -17,6 +17,7 @@ import PandalList from '@/components/PandalList';
 import RestaurantList from '@/components/RestaurantList';
 import MapContainerView from '@/components/MapContainerView';
 import EmergencyModal from '@/components/EmergencyModal';
+import SplashLoader from '@/components/SplashLoader';
 import {
   MapPin,
   Utensils,
@@ -75,6 +76,7 @@ function PujoParikramaApp() {
   const [isEmergencyModalOpen, setIsEmergencyModalOpen] = useState<boolean>(false);
   const [isOnline, setIsOnline] = useState<boolean>(true);
   const [isDrawerOpenOnMobileMap, setIsDrawerOpenOnMobileMap] = useState<boolean>(false);
+  const [showSplash, setShowSplash] = useState<boolean>(true);
 
   // Monitor network online/offline status
   useEffect(() => {
@@ -221,6 +223,11 @@ function PujoParikramaApp() {
 
   return (
     <div className="flex flex-col h-[100dvh] bg-slate-950 text-white overflow-hidden relative">
+      {/* 0. Animated Festive Durga Puja Splash Loader */}
+      {showSplash && (
+        <SplashLoader onComplete={() => setShowSplash(false)} minDuration={2200} />
+      )}
+
       {/* 1. Header Bar */}
       <header className="bg-slate-950 border-b border-amber-500/20 px-3 sm:px-6 py-2.5 flex items-center justify-between shrink-0 z-30 shadow-md">
         <div className="flex items-center gap-2.5">
@@ -406,6 +413,14 @@ function PujoParikramaApp() {
           </div>
         </section>
       </main>
+
+      {/* Desktop Bottom Footer Copyright */}
+      <footer className="hidden md:flex items-center justify-between px-4 py-1.5 bg-slate-950 border-t border-slate-900 text-[11px] text-slate-500 z-20 shrink-0">
+        <span>© 2026 Pujo Parikrama &amp; Companion • 100% Free Zero-Cost Guide</span>
+        <span>
+          Designed &amp; Developed with ❤️ by <strong className="text-amber-400 font-semibold">Anirban Sarkar</strong>
+        </span>
+      </footer>
 
       {/* 4. Mobile Bottom Navigation Bar (Optimized for Mobile & Webview Tap Targets) */}
       <nav className="md:hidden bg-slate-950/95 backdrop-blur-md border-t border-slate-800/80 px-2 py-1.5 safe-bottom flex items-center justify-around z-30 shrink-0">

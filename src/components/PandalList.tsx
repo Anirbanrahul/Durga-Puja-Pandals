@@ -458,6 +458,16 @@ export default function PandalList({
             );
           })
         )}
+
+        {/* Bottom Copyright Attribution */}
+        <div className="pt-4 pb-6 text-center border-t border-slate-800/80 mt-4 space-y-1">
+          <p className="text-xs text-slate-400 font-medium">
+            Designed &amp; Developed with ❤️ by <strong className="text-amber-400 font-bold">Anirban Sarkar</strong>
+          </p>
+          <p className="text-[10px] text-slate-500">
+            © 2026 Pujo Parikrama &amp; Companion • Free Kolkata Durga Puja Guide
+          </p>
+        </div>
       </div>
     </div>
   );
