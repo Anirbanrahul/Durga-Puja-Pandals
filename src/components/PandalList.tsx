@@ -11,6 +11,7 @@ import {
   formatDistance,
   getGoogleMapsDirectionUrl,
 } from '@/lib/geoUtils';
+import { persistFavorites, retrieveFavorites } from '@/lib/storageUtils';
 import {
   Search,
   SlidersHorizontal,
@@ -59,15 +60,7 @@ export default function PandalList({
   const [selectedZone, setSelectedZone] = useState<string>('All');
   const [sortBy, setSortBy] = useState<SortOption>('distance');
   const [favoriteIds, setFavoriteIds] = useState<Set<string>>(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        const saved = localStorage.getItem('pujo_favorite_pandals');
-        return saved ? new Set(JSON.parse(saved)) : new Set();
-      } catch {
-        return new Set();
-      }
-    }
-    return new Set();
+    return new Set(retrieveFavorites());
   });
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 
@@ -81,14 +74,7 @@ export default function PandalList({
       } else {
         next.add(id);
       }
-      try {
-        localStorage.setItem(
-          'pujo_favorite_pandals',
-          JSON.stringify(Array.from(next))
-        );
-      } catch {
-        // Ignore
-      }
+      persistFavorites(Array.from(next));
       return next;
     });
   };

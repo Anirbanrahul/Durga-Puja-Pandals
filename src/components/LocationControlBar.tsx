@@ -110,6 +110,24 @@ export default function LocationControlBar({
     };
 
     const errorHandler = (err: GeolocationPositionError) => {
+      // If high-accuracy timed out or unavailable, try fallback with cellular/wifi tower location (common on iOS indoors)
+      if ((err.code === 2 || err.code === 3) && !watch) {
+        navigator.geolocation.getCurrentPosition(
+          successHandler,
+          (fallbackErr) => {
+            setIsLocating(false);
+            setIsWatching(false);
+            let msg = 'Could not acquire GPS position.';
+            if (fallbackErr.code === 1) msg = 'Location permission was denied. You can write or choose your location below!';
+            if (fallbackErr.code === 2) msg = 'Position unavailable. Check your device GPS signal or type your location.';
+            if (fallbackErr.code === 3) msg = 'Location request timed out. Please type your location below.';
+            setGpsError(msg);
+          },
+          { enableHighAccuracy: false, timeout: 8000, maximumAge: 60000 }
+        );
+        return;
+      }
+
       setIsLocating(false);
       setIsWatching(false);
       let msg = 'Could not acquire GPS position.';
@@ -348,6 +366,50 @@ export default function LocationControlBar({
 
   return (
     <div className={`w-full bg-slate-900/95 border-b border-amber-500/30 backdrop-blur-md shadow-lg ${className}`}>
+      {/* Fullscreen Blocking GPS Loading Modal */}
+      {isLocating && (
+        <div className="fixed inset-0 z-[99999] bg-slate-950/85 backdrop-blur-md flex flex-col items-center justify-center p-4 sm:p-6 text-center select-none animate-in fade-in duration-200">
+          <div className="max-w-sm w-full bg-slate-900/95 border-2 border-amber-500/50 rounded-3xl p-6 sm:p-8 shadow-2xl flex flex-col items-center relative overflow-hidden">
+            {/* Glowing ambient background glow */}
+            <div className="absolute -top-16 -left-16 w-36 h-36 bg-rose-600/25 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -bottom-16 -right-16 w-36 h-36 bg-amber-500/25 rounded-full blur-2xl pointer-events-none" />
+
+            {/* Glowing radar pulse beacon */}
+            <div className="relative w-24 h-24 mb-5 flex items-center justify-center">
+              <div className="absolute inset-0 rounded-full bg-amber-500/20 animate-ping duration-1000" />
+              <div className="absolute w-20 h-20 rounded-full bg-rose-600/30 animate-pulse duration-700" />
+              <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-rose-600 via-amber-500 to-amber-400 flex items-center justify-center shadow-xl shadow-rose-900/60 p-0.5">
+                <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+                  <Navigation className="w-7 h-7 text-amber-400 animate-spin" />
+                </div>
+              </div>
+            </div>
+
+            <h3 className="text-lg font-extrabold text-white mb-1.5 tracking-tight">
+              Acquiring Live GPS Location...
+            </h3>
+            <p className="text-xs text-amber-200/90 mb-4 max-w-xs leading-relaxed">
+              Locking onto device satellites and calculating walking distances to all 232+ Durga Puja pandals in Kolkata.
+            </p>
+
+            <div className="flex items-center gap-2 text-[11px] text-slate-300 bg-slate-950/80 px-3.5 py-2 rounded-full border border-slate-800 mb-5 shadow-inner">
+              <Compass className="w-3.5 h-3.5 text-amber-400 animate-spin" />
+              <span>Please tap &quot;Allow&quot; if browser asks for location</span>
+            </div>
+
+            <button
+              onClick={() => {
+                setIsLocating(false);
+                setIsWatching(false);
+              }}
+              className="py-2.5 px-6 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition-colors shadow-md active:scale-95"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Top Bar: Active Location Summary & Explicit Action Buttons with Clear Labels */}
       <div className="max-w-7xl mx-auto px-3 sm:px-4 py-2.5 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2.5">
         

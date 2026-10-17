@@ -13,6 +13,12 @@ import {
   DEFAULT_KOLKATA_COORDS,
   safeString,
 } from '@/lib/geoUtils';
+import {
+  persistActiveLocation,
+  retrieveActiveLocation,
+  cacheOfflinePandals,
+  retrieveOfflinePandals,
+} from '@/lib/storageUtils';
 import LocationControlBar from '@/components/LocationControlBar';
 import PandalList from '@/components/PandalList';
 import RestaurantList from '@/components/RestaurantList';
@@ -79,6 +85,12 @@ function PujoParikramaApp() {
   const [isDrawerOpenOnMobileMap, setIsDrawerOpenOnMobileMap] = useState<boolean>(false);
   const [showSplash, setShowSplash] = useState<boolean>(true);
 
+  // Helper to persist location in universal multi-tier storage (localStorage + Cookies for iOS/Android)
+  const handleLocationChange = useCallback((newLoc: ActiveLocation) => {
+    setUserLocation(newLoc);
+    persistActiveLocation(newLoc);
+  }, []);
+
   // Monitor network online/offline status
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -94,7 +106,7 @@ function PujoParikramaApp() {
     }
   }, []);
 
-  // Check URL params on update
+  // Restore saved location or URL query on initial mount / reload
   useEffect(() => {
     const urlLat = searchParams.get('lat');
     const urlLng = searchParams.get('lng');
@@ -102,14 +114,40 @@ function PujoParikramaApp() {
     const urlSource = searchParams.get('source');
 
     if (urlLat && urlLng) {
-      setUserLocation({
+      const loc: ActiveLocation = {
         lat: parseFloat(urlLat),
         lng: parseFloat(urlLng),
         address: urlAddr || 'Shared Pin',
         source: (urlSource as ActiveLocation['source']) || 'share',
-      });
+      };
+      handleLocationChange(loc);
+      return;
     }
-  }, [searchParams]);
+
+    // Check universal storage (localStorage + cookie fallback for iOS Safari/Android Webviews)
+    const saved = retrieveActiveLocation();
+    if (saved) {
+      setUserLocation(saved);
+
+      // If previously set via GPS, quietly refresh coordinates if available
+      if (saved.source === 'gps' && typeof navigator !== 'undefined' && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            handleLocationChange({
+              lat: pos.coords.latitude,
+              lng: pos.coords.longitude,
+              address: saved.address || 'Current Live GPS Location',
+              source: 'gps',
+              accuracy: Math.round(pos.coords.accuracy),
+              timestamp: pos.timestamp,
+            });
+          },
+          () => {}, // silent fallback to saved cached position
+          { timeout: 8000, maximumAge: 60000 }
+        );
+      }
+    }
+  }, [searchParams, handleLocationChange]);
 
   // Fetch Pujo Pandals from API route
   useEffect(() => {
@@ -119,19 +157,29 @@ function PujoParikramaApp() {
         const res = await fetch('/api/pujo-locations');
         const data = await res.json();
 
-        if (data && Array.isArray(data.features)) {
+        if (data && Array.isArray(data.features) && data.features.length > 0) {
           setRawPandalFeatures(data.features);
+          cacheOfflinePandals(data.features);
         }
       } catch (err) {
         console.warn('Failed to fetch /api/pujo-locations, loading fallback...', err);
         try {
           const fallbackRes = await fetch('/data/pujo-pandals.geojson');
           const fallbackData = await fallbackRes.json();
-          if (fallbackData && Array.isArray(fallbackData.features)) {
+          if (fallbackData && Array.isArray(fallbackData.features) && fallbackData.features.length > 0) {
             setRawPandalFeatures(fallbackData.features);
+            cacheOfflinePandals(fallbackData.features);
           }
         } catch (e) {
-          console.error('All pandal loading failed:', e);
+          console.error('All network pandal loading failed, checking offline cache:', e);
+          try {
+            const cachedPandals = await retrieveOfflinePandals<Record<string, unknown>>();
+            if (cachedPandals && cachedPandals.length > 0) {
+              setRawPandalFeatures(cachedPandals);
+            }
+          } catch {
+            // Ignore
+          }
         }
       } finally {
         setIsLoadingPandals(false);
@@ -272,7 +320,7 @@ function PujoParikramaApp() {
       {/* 2. 4-Mode Location Control Bar */}
       <LocationControlBar
         activeLocation={userLocation}
-        onLocationChange={setUserLocation}
+        onLocationChange={handleLocationChange}
         onCustomDataUpload={handleCustomDataUpload}
         className="shrink-0 z-20"
       />
