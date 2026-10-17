@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#881337" />
+      <stop offset="50%" stop-color="#4c0519" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="110" fill="url(#bgGrad)" />
+  <!-- Decorative border ring -->
+  <circle cx="256" cy="256" r="220" fill="none" stroke="url(#goldGrad)" stroke-width="6" stroke-dasharray="12 12" opacity="0.6"/>
+  <!-- Central Trishul (Trident) & Divine Eye Motif -->
+  <path d="M256 60 L270 180 L290 190 L260 210 L256 420 L252 210 L222 190 L242 180 Z" fill="url(#goldGrad)" />
+  <!-- Left Trident Prong -->
+  <path d="M222 190 C180 170 140 120 150 90 C160 85 180 110 200 160 C210 180 220 188 222 190 Z" fill="url(#goldGrad)" />
+  <!-- Right Trident Prong -->
+  <path d="M290 190 C332 170 372 120 362 90 C352 85 332 110 312 160 C302 180 292 188 290 190 Z" fill="url(#goldGrad)" />
+  <!-- Third Eye (Trinayan) -->
+  <ellipse cx="256" cy="260" rx="14" ry="24" fill="#dc2626" />
+  <circle cx="256" cy="260" r="5" fill="#fef08a" />
+  <!-- Left Eye -->
+  <path d="M170 290 Q210 260 240 295 Q210 320 170 290 Z" fill="#ffffff" />
+  <circle cx="210" cy="292" r="10" fill="#0f172a" />
+  <!-- Right Eye -->
+  <path d="M342 290 Q302 260 272 295 Q302 320 342 290 Z" fill="#ffffff" />
+  <circle cx="302" cy="292" r="10" fill="#0f172a" />
+  <!-- Nose ring / Nath -->
+  <circle cx="240" cy="340" r="14" fill="none" stroke="url(#goldGrad)" stroke-width="4" />
+</svg>

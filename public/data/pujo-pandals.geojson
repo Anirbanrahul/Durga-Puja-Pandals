@@ -1,0 +1,590 @@
+{
+  "type": "FeatureCollection",
+  "name": "Kolkata Durga Puja Pandals - Pujo Parikrama Companion",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "bagbazar-sarbojanin",
+        "name": "Bagbazar Sarbojanin Durgotsav",
+        "zone": "North Kolkata",
+        "description": "One of the oldest and most revered traditional community pujas in Kolkata (founded 1919). Celebrated for its serene, classic Ekchala Sabeki Pratima, magnificent immersion procession, and authentic festive carnival atmosphere.",
+        "nearestMetro": "Shyambazar Metro (Gate 1)",
+        "famousFor": "Sabeki Ekchala Idol & Historic Immersion",
+        "category": "Heritage",
+        "address": "Bagbazar Ghat Road, Bagbazar, Kolkata 700003"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3664, 22.6033]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "kumartuli-park",
+        "name": "Kumartuli Park Sarbojanin",
+        "zone": "North Kolkata",
+        "description": "Located in the heart of Kolkata's legendary idol-makers colony. Known for fusing clay sculpture heritage with breathtaking architectural themes and intricate clay craftsmanship.",
+        "nearestMetro": "Shovabazar Sutanuti Metro",
+        "famousFor": "Clay Artistry & Visual Grandeur",
+        "category": "Theme",
+        "address": "Kumartuli, Shobhabazar, Kolkata 700005"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3649, 22.5988]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sovabazar-rajbari",
+        "name": "Sovabazar Rajbari (Raja Nabakrishna Deb)",
+        "zone": "North Kolkata",
+        "description": "Historic Bonedi Bari puja started in 1757 by Raja Nabakrishna Deb. Features the grand Natmandir courtyard, traditional rituals, cannons firing on Sandhi Puja, and unmatched aristocratic Kolkata heritage.",
+        "nearestMetro": "Shovabazar Sutanuti Metro",
+        "famousFor": "Bonedi Bari Heritage & Historic Natmandir",
+        "category": "Heritage",
+        "address": "33 and 36, Raja Nabakrishna Street, Sovabazar, Kolkata 700005"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3625, 22.5971]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "hatibagan-sarbojanin",
+        "name": "Hatibagan Sarbojanin Durgotsav",
+        "zone": "North Kolkata",
+        "description": "A historic crowd puller in North Kolkata with over 85 years of tradition, recognized for exceptional lighting, thoughtful thematic decor, and warm community hospitality.",
+        "nearestMetro": "Shyambazar Metro",
+        "famousFor": "Innovative Lightwork & Classic Charm",
+        "category": "Crowd Favorite",
+        "address": "Hatibagan Market Crossing, North Kolkata 700004"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3732, 22.5991]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ahiritola-sarbojanin",
+        "name": "Ahiritola Sarbojanin Durgotsab",
+        "zone": "North Kolkata",
+        "description": "Renowned for deeply researched socio-cultural themes, ornate installations right beside the Hooghly river ghats, and captivating music & light choreography.",
+        "nearestMetro": "Shovabazar Sutanuti Metro",
+        "famousFor": "Riverbank Cultural Artistry",
+        "category": "Theme",
+        "address": "BK Paul Avenue, Ahiritola, Kolkata 700005"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3582, 22.5936]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mohammad-ali-park",
+        "name": "Mohammad Ali Park Durga Puja",
+        "zone": "Central Kolkata",
+        "description": "One of Kolkata's most iconic central pujas, famous for replicating grand Indian palaces, castles, and historic temples with glowing illuminated facades.",
+        "nearestMetro": "Mahatma Gandhi Road Metro",
+        "famousFor": "Magnificent Castle & Palace Facades",
+        "category": "Crowd Favorite",
+        "address": "CR Avenue & MG Road Junction, College Street, Kolkata 700073"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3615, 22.5786]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "college-square",
+        "name": "College Square Sarbojanin",
+        "zone": "Central Kolkata",
+        "description": "World-famous for its majestic pandal situated alongside the College Square water reservoir, creating shimmering reflections of thousands of dazzling light displays.",
+        "nearestMetro": "Central / MG Road Metro",
+        "famousFor": "Lake Water Reflections & Chandannagar Lights",
+        "category": "Crowd Favorite",
+        "address": "53 College Street, Kolkata 700073"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3639, 22.5762]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "santosh-mitra-square",
+        "name": "Santosh Mitra Square (Lebutala)",
+        "zone": "Central Kolkata",
+        "description": "Consistently features high-octane conceptual wonders such as laser shows, giant replicas of Ram Mandir, Sphere Las Vegas, and intricate gold-leaf deities.",
+        "nearestMetro": "Central / Sealdah Metro",
+        "famousFor": "Blockbuster Visual Spectacles & Laser Shows",
+        "category": "Crowd Favorite",
+        "address": "St. James Square, Lebutala, Bowbazar, Kolkata 700012"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3688, 22.5701]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sreebhumi-sporting",
+        "name": "Sreebhumi Sporting Club",
+        "zone": "North East / VIP Road",
+        "description": "The golden crown of VIP Road Durga Puja parikrama. Celebrated for replicating global architectural landmarks (Burj Khalifa, Vatican City, Disneyland, etc.) with real gold and diamond ornaments on the goddess.",
+        "nearestMetro": "Ultadanga / VIP Road Link",
+        "famousFor": "Lavish World Replicas & Royal Adornment",
+        "category": "Crowd Favorite",
+        "address": "Canal Street, Sreebhumi, Lake Town, Kolkata 700048"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.4063, 22.5968]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "dumdum-park-tarun-sangha",
+        "name": "Dum Dum Park Tarun Sangha",
+        "zone": "North East / VIP Road",
+        "description": "A vanguard of contemporary installation art in Bengal. Every year presents thought-provoking themes utilizing unconventional materials and mesmerizing ambient music.",
+        "nearestMetro": "Dum Dum Metro / VIP Road",
+        "famousFor": "Visionary Contemporary Art & Sculpture",
+        "category": "Theme",
+        "address": "Dum Dum Park, Salt Lake Bypass, Kolkata 700055"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.4121, 22.6074]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "dumdum-park-bharat-chakra",
+        "name": "Dum Dum Park Bharat Chakra",
+        "zone": "North East / VIP Road",
+        "description": "Celebrated for rustic indigenous handicrafts, intricate bamboo, terracotta, and folk artistry from rural Bengal and North Eastern India.",
+        "nearestMetro": "Dum Dum Metro / VIP Road",
+        "famousFor": "Rural Folk Art & Intricate Craftwork",
+        "category": "Theme",
+        "address": "Dum Dum Park, Lake Town, Kolkata 700055"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.4146, 22.6089]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "fd-block-salt-lake",
+        "name": "FD Block Sarbojanin Salt Lake",
+        "zone": "Salt Lake",
+        "description": "Salt Lake's most celebrated mega-pandal, famous for transforming the FD Block park into royal forts, ancient Buddhist monasteries, and fantasy landscapes.",
+        "nearestMetro": "Karunamoyee / Central Park Metro",
+        "famousFor": "Grand Architectural Forts & Spacious Grounds",
+        "category": "Crowd Favorite",
+        "address": "FD Block Park, Sector 3, Bidhannagar, Kolkata 700091"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.4116, 22.5855]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "bj-block-salt-lake",
+        "name": "BJ Block Sarbojanin Salt Lake",
+        "zone": "Salt Lake",
+        "description": "A beloved cultural heartland of Salt Lake, offering serene community festivities, authentic Bengali cultural performances, and intricate traditional design.",
+        "nearestMetro": "Karunamoyee Metro",
+        "famousFor": "Serene Community Festivities & Folk Decor",
+        "category": "Traditional",
+        "address": "BJ Block Park, Sector 2, Bidhannagar, Kolkata 700091"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.4172, 22.5878]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "maddox-square",
+        "name": "Maddox Square (Ritchie Road)",
+        "zone": "South Kolkata",
+        "description": "The legendary epicenter of Kolkata's festive youth culture, open-air Adda, live dhak beats, and traditional Sabeki idol under a massive illuminated canopy.",
+        "nearestMetro": "Netaji Bhavan / Hazra Metro",
+        "famousFor": "The Quintessential Durga Puja Adda & Dhak",
+        "category": "Heritage",
+        "address": "Maddox Square Park, Ritchie Rd, Ballygunge, Kolkata 700019"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3575, 22.5312]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ekdalia-evergreen",
+        "name": "Ekdalia Evergreen Club",
+        "zone": "South Kolkata",
+        "description": "Established in 1945, famous for preserving genuine traditional Pratima, breathtaking German chandeliers, and monumental glowing replicas of famous Indian temples.",
+        "nearestMetro": "Gariahat Crossing / Kalighat Metro",
+        "famousFor": "Royal Chandeliers & Traditional Divine Idol",
+        "category": "Traditional",
+        "address": "15 Ekdalia Road, Gariahat, Kolkata 700019"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3668, 22.5186]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "singhi-park",
+        "name": "Singhi Park Sarbojanin",
+        "zone": "South Kolkata",
+        "description": "Located right opposite Ekdalia, Singhi Park is celebrated for majestic temple replicas, flawless lighting artistry from Chandannagar, and regal presentation.",
+        "nearestMetro": "Gariahat Crossing / Kalighat Metro",
+        "famousFor": "Chandannagar Lighting Artistry & Grand Temples",
+        "category": "Traditional",
+        "address": "Gariahat Road, Dover Terrace, Ballygunge, Kolkata 700019"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3653, 22.5181]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ballygunge-cultural",
+        "name": "Ballygunge Cultural Association",
+        "zone": "South Kolkata",
+        "description": "A pioneering cultural institution blending modern artistic refinement with deep Bengali classical literature, art, and traditional values.",
+        "nearestMetro": "Kalighat / Hazra Metro",
+        "famousFor": "Refined Bengali Aesthetic & Cultural Warmth",
+        "category": "Theme",
+        "address": "57 Jatin Das Road, Ballygunge, Kolkata 700029"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3631, 22.5208]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tridhara-sammilani",
+        "name": "Tridhara Sammilani",
+        "zone": "South Kolkata",
+        "description": "Situated at the junction of Rashbehari Avenue and Manohar Pukur Road. Renowned for award-winning architectural innovations and poignant social narratives.",
+        "nearestMetro": "Kalighat Metro",
+        "famousFor": "Award-Winning Themes & Architectural Craft",
+        "category": "Theme",
+        "address": "Rashbehari Avenue & Manohar Pukur Rd, Kolkata 700029"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3562, 22.5201]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "deshapriya-park",
+        "name": "Deshapriya Park Durgotsav",
+        "zone": "South Kolkata",
+        "description": "A landmark south Kolkata puja celebrated for monumental installations and historic scale, attracting hundreds of thousands of visitors every festive night.",
+        "nearestMetro": "Kalighat Metro",
+        "famousFor": "Colossal Theme Structures & Grand Ambience",
+        "category": "Crowd Favorite",
+        "address": "Deshapriya Park, Rashbehari Avenue, Kolkata 700026"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3541, 22.5185]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mudiali-club",
+        "name": "Mudiali Club",
+        "zone": "South Kolkata",
+        "description": "Known as the gem of Lake Road. Celebrated for pristine eco-friendly materials, gentle traditional illumination, and soothing devotional aesthetics.",
+        "nearestMetro": "Rabindra Sarobar / Kalighat Metro",
+        "famousFor": "Pristine Craftsmanship & Harmonious Atmosphere",
+        "category": "Traditional",
+        "address": "Lake Avenue & Southern Avenue, Mudiali, Kolkata 700026"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3491, 22.5113]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "shiv-mandir-sarbojanin",
+        "name": "Shiv Mandir Sarbojanin Durgotsav",
+        "zone": "South Kolkata",
+        "description": "Renowned for atmospheric installations that fuse sacred traditions with contemporary installation art along the serene shores of Rabindra Sarobar.",
+        "nearestMetro": "Rabindra Sarobar Metro",
+        "famousFor": "Artistic Sensitivity & Scenic Lake Surroundings",
+        "category": "Theme",
+        "address": "Lake Temple Road, Rabindra Sarobar, Kolkata 700029"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3478, 22.5126]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "suruchi-sangha",
+        "name": "Suruchi Sangha (New Alipore)",
+        "zone": "South Kolkata / New Alipore",
+        "description": "Each year, Suruchi Sangha adopts a unique Indian state or cultural region, creating authentic handicraft architecture, indigenous music, and iconic festival songs.",
+        "nearestMetro": "Kalighat / Majerhat Link",
+        "famousFor": "Pan-Indian Cultural Themes & State Heritage",
+        "category": "Theme",
+        "address": "500/A, BL Saha Road, New Alipore, Kolkata 700053"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3305, 22.5135]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "chetla-agrani",
+        "name": "Chetla Agrani Club",
+        "zone": "South Kolkata",
+        "description": "A perennial powerhouse in theme pujas, crafting mesmerizing rural Bengali village setups, terracotta temples, and hand-carved wood and stone motifs.",
+        "nearestMetro": "Kalighat Metro",
+        "famousFor": "Rural Bengal Themes & Organic Artistry",
+        "category": "Theme",
+        "address": "Chetla Central Road, Chetla, Kolkata 700027"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3398, 22.5195]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "badamtala-ashar-sangha",
+        "name": "Badamtala Ashar Sangha",
+        "zone": "South Kolkata",
+        "description": "Over 80 years old, legendary for winning numerous creative awards through subtle, poignant themes and deeply emotional artistic expressions.",
+        "nearestMetro": "Kalighat Metro (Gate 1)",
+        "famousFor": "Subtle Thematic Excellence & Design Awards",
+        "category": "Theme",
+        "address": "Nepal Bhattacharjee Street, Kalighat, Kolkata 700026"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3472, 22.5218]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "66-pally",
+        "name": "66 Pally Club",
+        "zone": "South Kolkata",
+        "description": "Located adjacent to Badamtala, celebrated for empowering women priestesses, eco-friendly handloom installations, and social reform messages.",
+        "nearestMetro": "Kalighat Metro",
+        "famousFor": "Progressive Rituals & Handcrafted Decor",
+        "category": "Theme",
+        "address": "Nepal Bhattacharjee St, Kalighat, Kolkata 700026"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3468, 22.5224]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "behala-natun-dal",
+        "name": "Behala Natun Dal",
+        "zone": "Behala / South",
+        "description": "A standout titan of South Suburban Kolkata, celebrated for expansive artistic installations that immerse parikrama travelers into surreal visual landscapes.",
+        "nearestMetro": "Taratala / Behala Chowrasta Metro",
+        "famousFor": "Immersive Artistic Environments",
+        "category": "Theme",
+        "address": "14/1/1 Dhyan Niranjan Sen Sarani, Behala, Kolkata 700034"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3182, 22.5021]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "behala-club",
+        "name": "Behala Club Sarbojanin",
+        "zone": "Behala / South",
+        "description": "Showcases authentic traditional craft forms, intricate brass bell chimes, woven cane work, and heartwarming community warmth.",
+        "nearestMetro": "Behala Chowrasta Metro",
+        "famousFor": "Indigenous Crafts & Bell Metal Work",
+        "category": "Traditional",
+        "address": "Bonomali Naskar Road, Behala, Kolkata 700034"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3156, 22.4985]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "babubagan-club",
+        "name": "Babubagan Club Sarbojanin",
+        "zone": "Dhakuria / South",
+        "description": "Famous for spectacular replicas of ancient Indian temple stone carvings and coin-based or glass-cut heritage themes.",
+        "nearestMetro": "Dhakuria Station / Kalighat Metro",
+        "famousFor": "Ancient Heritage Stone Temple Replicas",
+        "category": "Theme",
+        "address": "Babu Bagan Lane, Dhakuria, Kolkata 700031"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3681, 22.5065]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "selimpur-pally",
+        "name": "Selimpur Pally Durgotsav",
+        "zone": "Dhakuria / South",
+        "description": "Renowned for rustic themes highlighting the rich traditions of rural Bengal artists, weavers, and farmers.",
+        "nearestMetro": "Dhakuria / Jadavpur Link",
+        "famousFor": "Rural Bengal Heritage Themes",
+        "category": "Theme",
+        "address": "Selimpur Road, Dhakuria, Kolkata 700031"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3675, 22.5042]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "jodhpur-park",
+        "name": "Jodhpur Park Sarbojanin",
+        "zone": "South Kolkata",
+        "description": "One of the most popular community celebrations in South Kolkata, noted for blend of modern technology, dynamic lighting, and festive fanfare.",
+        "nearestMetro": "Rabindra Sarobar / Jadavpur",
+        "famousFor": "Festive Grandeur & Modern Lighting",
+        "category": "Crowd Favorite",
+        "address": "Jodhpur Park, Kolkata 700068"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3619, 22.5028]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "naktala-udayan-sangha",
+        "name": "Naktala Udayan Sangha",
+        "zone": "South Kolkata",
+        "description": "A crown jewel of deep South Kolkata parikrama, known for daring conceptual installations, avant-garde idols, and poetic festival atmospheres.",
+        "nearestMetro": "Gitanjali (Naktala) Metro",
+        "famousFor": "Avant-Garde Conceptual Masterpieces",
+        "category": "Theme",
+        "address": "Naktala Main Road, Naktala, Kolkata 700047"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3642, 22.4746]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "bosepukur-sitala-mandir",
+        "name": "Bosepukur Sitala Mandir Durgotsab",
+        "zone": "Kasba / South East",
+        "description": "The historic pioneer that revolutionized theme pujas in Kolkata (famed for the earthen cup 'bhaar' pandal). Continues to create iconic indigenous thematic marvels.",
+        "nearestMetro": "Ballygunge Station / Gariahat",
+        "famousFor": "Pioneers of Kolkata Thematic Clay Art",
+        "category": "Theme",
+        "address": "Bosepukur Road, Kasba, Kolkata 700042"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3842, 22.5162]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "chaltabagan-sarbojanin",
+        "name": "Manicktalla Chaltabagan Lohapatty",
+        "zone": "Central / North Kolkata",
+        "description": "Famous for its energetic Dhunuchi dance competitions, celebrity visits, and majestic glittering glass and brass pandals.",
+        "nearestMetro": "Girish Park Metro",
+        "famousFor": "Dhunuchi Naach & Dazzling Glass Craft",
+        "category": "Crowd Favorite",
+        "address": "Raja Rammohan Roy Sarani, Manicktala, Kolkata 700009"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3725, 22.5846]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tala-barowari",
+        "name": "Tala Barowari Durgotsab",
+        "zone": "North Kolkata",
+        "description": "Over a century old community puja renowned for maintaining pristine traditional Bengali customs, community bhog, and exquisite traditional Pratima.",
+        "nearestMetro": "Shyambazar / Belgachia Metro",
+        "famousFor": "Century-Old Sabeki Tradition & Community Bhog",
+        "category": "Traditional",
+        "address": "Tala Park, North Kolkata 700037"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [88.3752, 22.6105]
+      }
+    }
+  ]
+}
