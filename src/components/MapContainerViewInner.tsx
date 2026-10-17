@@ -11,7 +11,7 @@ import {
 } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Pandal, Restaurant, ActiveLocation } from '@/types';
+import { Pandal, Restaurant, Washroom, Hospital, ActiveLocation } from '@/types';
 import {
   formatDistance,
   getGoogleMapsDirectionUrl,
@@ -25,12 +25,16 @@ import {
   Sparkles,
   ExternalLink,
   Layers,
+  PhoneCall,
+  Accessibility,
 } from 'lucide-react';
 
 interface MapViewProps {
   userLocation: ActiveLocation;
   pandals: Pandal[];
   restaurants?: Restaurant[];
+  washrooms?: Washroom[];
+  hospitals?: Hospital[];
   selectedPandalId?: string | null;
   onSelectPandal?: (pandal: Pandal) => void;
   onFindFoodNearPandal?: (pandal: Pandal) => void;
@@ -85,7 +89,7 @@ function MapController({
 
 // Create custom SVG Leaflet DivIcons
 function createCustomMarkerIcon(
-  type: 'pandal' | 'user' | 'restaurant' | 'selected-pandal',
+  type: 'pandal' | 'user' | 'restaurant' | 'selected-pandal' | 'washroom' | 'hospital',
   label?: string
 ) {
   if (type === 'user') {
@@ -114,6 +118,34 @@ function createCustomMarkerIcon(
             <path d="M15 2v10a2 2 0 0 1-2 2H9"></path>
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
           </svg>
+        </div>
+      `,
+      iconSize: [28, 28],
+      iconAnchor: [14, 14],
+      popupAnchor: [0, -14],
+    });
+  }
+
+  if (type === 'washroom') {
+    return L.divIcon({
+      className: 'washroom-marker-icon',
+      html: `
+        <div class="group relative flex items-center justify-center w-7 h-7 bg-cyan-600 border-2 border-white text-white rounded-full shadow-md hover:scale-125 transition-transform">
+          <span class="text-xs">🚻</span>
+        </div>
+      `,
+      iconSize: [28, 28],
+      iconAnchor: [14, 14],
+      popupAnchor: [0, -14],
+    });
+  }
+
+  if (type === 'hospital') {
+    return L.divIcon({
+      className: 'hospital-marker-icon',
+      html: `
+        <div class="group relative flex items-center justify-center w-7 h-7 bg-red-600 border-2 border-white text-white rounded-full shadow-md hover:scale-125 transition-transform animate-pulse">
+          <span class="text-xs">🏥</span>
         </div>
       `,
       iconSize: [28, 28],
@@ -157,6 +189,8 @@ export default function MapContainerViewInner({
   userLocation,
   pandals,
   restaurants = [],
+  washrooms = [],
+  hospitals = [],
   selectedPandalId,
   onSelectPandal,
   onFindFoodNearPandal,
@@ -390,6 +424,91 @@ export default function MapContainerViewInner({
             </Marker>
           );
         })}
+
+        {/* Washroom Markers */}
+        {washrooms.map((w) => (
+          <Marker
+            key={w.id}
+            position={[w.lat, w.lng]}
+            icon={createCustomMarkerIcon('washroom')}
+          >
+            <Popup className="custom-popup">
+              <div className="p-1 text-slate-900 font-sans space-y-1.5">
+                <div className="flex items-center justify-between gap-2 border-b border-slate-200 pb-1">
+                  <h5 className="text-xs font-bold text-slate-900">{w.name}</h5>
+                  {w.distanceMeters !== undefined && (
+                    <span className="text-[10px] font-bold text-cyan-700">
+                      {formatDistance(w.distanceMeters)}
+                    </span>
+                  )}
+                </div>
+                <p className="text-[11px] text-slate-600 font-medium">
+                  {w.type} • {w.fee || 'Free'}
+                </p>
+                {w.address && (
+                  <p className="text-[10px] text-slate-500 line-clamp-1">{w.address}</p>
+                )}
+                <div className="pt-1">
+                  <a
+                    href={getGoogleMapsDirectionUrl(userLocation.lat, userLocation.lng, w.lat, w.lng, 'walking')}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-1 px-2 rounded bg-cyan-700 text-white text-[10px] font-semibold flex items-center justify-center gap-1"
+                  >
+                    <Navigation className="w-2.5 h-2.5" />
+                    <span>Walking Directions</span>
+                  </a>
+                </div>
+              </div>
+            </Popup>
+          </Marker>
+        ))}
+
+        {/* Hospital Markers */}
+        {hospitals.map((h) => (
+          <Marker
+            key={h.id}
+            position={[h.lat, h.lng]}
+            icon={createCustomMarkerIcon('hospital')}
+          >
+            <Popup className="custom-popup">
+              <div className="p-1 text-slate-900 font-sans space-y-1.5">
+                <div className="flex items-center justify-between gap-2 border-b border-slate-200 pb-1">
+                  <h5 className="text-xs font-bold text-slate-900">{h.name}</h5>
+                  {h.distanceMeters !== undefined && (
+                    <span className="text-[10px] font-bold text-red-700">
+                      {formatDistance(h.distanceMeters)}
+                    </span>
+                  )}
+                </div>
+                <p className="text-[11px] text-red-700 font-bold">
+                  {h.type} • 24/7 Emergency
+                </p>
+                {h.address && (
+                  <p className="text-[10px] text-slate-500 line-clamp-1">{h.address}</p>
+                )}
+                <div className="flex gap-1 pt-1">
+                  <a
+                    href={`tel:${h.emergencyPhone}`}
+                    className="flex-1 py-1 px-1.5 rounded bg-red-600 text-white text-[10px] font-bold flex items-center justify-center gap-1"
+                  >
+                    <PhoneCall className="w-2.5 h-2.5" />
+                    <span>Call ({h.emergencyPhone})</span>
+                  </a>
+                  <a
+                    href={getGoogleMapsDirectionUrl(userLocation.lat, userLocation.lng, h.lat, h.lng, 'driving')}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-1 px-1.5 rounded bg-slate-800 text-white text-[10px] font-semibold flex items-center justify-center gap-1"
+                  >
+                    <Navigation className="w-2.5 h-2.5" />
+                    <span>Route</span>
+                  </a>
+                </div>
+              </div>
+            </Popup>
+          </Marker>
+        ))}
       </MapContainer>
 
       {/* Floating Layer Toggle & Recenter Controls */}
@@ -432,6 +551,18 @@ export default function MapContainerViewInner({
           <div className="flex items-center gap-1">
             <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
             <span>Food ({restaurants.length})</span>
+          </div>
+        )}
+        {washrooms.length > 0 && (
+          <div className="flex items-center gap-1">
+            <div className="w-2.5 h-2.5 rounded-full bg-cyan-500" />
+            <span>Toilets ({washrooms.length})</span>
+          </div>
+        )}
+        {hospitals.length > 0 && (
+          <div className="flex items-center gap-1">
+            <div className="w-2.5 h-2.5 rounded-full bg-red-600" />
+            <span>Hospitals ({hospitals.length})</span>
           </div>
         )}
       </div>

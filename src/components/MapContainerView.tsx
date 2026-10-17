@@ -2,12 +2,14 @@
 
 import dynamic from 'next/dynamic';
 import { Loader2, Compass } from 'lucide-react';
-import { Pandal, Restaurant, ActiveLocation } from '@/types';
+import { Pandal, Restaurant, Washroom, Hospital, ActiveLocation } from '@/types';
 
 interface MapContainerViewProps {
   userLocation: ActiveLocation;
   pandals: Pandal[];
   restaurants?: Restaurant[];
+  washrooms?: Washroom[];
+  hospitals?: Hospital[];
   selectedPandalId?: string | null;
   onSelectPandal?: (pandal: Pandal) => void;
   onFindFoodNearPandal?: (pandal: Pandal) => void;

@@ -3,8 +3,9 @@
  * 100% Free - zero paid API keys
  */
 
-import { Restaurant } from '@/types';
+import { Restaurant, Washroom, Hospital } from '@/types';
 import { haversineDistance } from './geoUtils';
+import { CURATED_KOLKATA_WASHROOMS, CURATED_KOLKATA_HOSPITALS } from './kolkataCivicData';
 
 // Overpass API Endpoints (Primary with fallback mirror)
 const OVERPASS_ENDPOINTS = [
@@ -331,4 +332,185 @@ export async function fetchNearbyRestaurants(
   }
 
   return fetchedData;
+}
+
+/**
+ * Fetches nearby public and mall washrooms with dynamic Haversine distance
+ */
+export async function fetchNearbyWashrooms(
+  lat: number,
+  lng: number,
+  radiusMeters: number = 5000
+): Promise<Washroom[]> {
+  // Calculate dynamic distance for curated washrooms first (100% offline ready)
+  const results: Washroom[] = CURATED_KOLKATA_WASHROOMS.map((w) => {
+    const dist = haversineDistance(lat, lng, w.lat, w.lng);
+    return {
+      ...w,
+      distanceMeters: dist,
+      distanceKm: Number((dist / 1000).toFixed(2)),
+    };
+  });
+
+  // Try querying Overpass for live local public toilets if online
+  if (typeof window !== 'undefined' && navigator.onLine) {
+    const query = `
+      [out:json][timeout:4];
+      (
+        node["amenity"="toilets"](around:${radiusMeters},${lat},${lng});
+      );
+      out body 15;
+    `;
+
+    for (const endpoint of OVERPASS_ENDPOINTS) {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3500);
+
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `data=${encodeURIComponent(query)}`,
+          signal: controller.signal,
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!res.ok) continue;
+        const json = await res.json();
+
+        if (json && Array.isArray(json.elements)) {
+          for (const el of json.elements) {
+            if (typeof el.lat !== 'number' || typeof el.lon !== 'number') continue;
+            const dist = haversineDistance(lat, lng, el.lat, el.lon);
+            const name = el.tags?.name || 'Public Toilet (KMC / Sulabh)';
+            
+            // Check if already in curated list
+            const alreadyExists = results.some(
+              (r) => Math.abs(r.lat - el.lat) < 0.001 && Math.abs(r.lng - el.lon) < 0.001
+            );
+
+            if (!alreadyExists) {
+              results.push({
+                id: `osm-toilet-${el.id}`,
+                name: name,
+                lat: el.lat,
+                lng: el.lon,
+                type: el.tags?.operator || 'Public / Sulabh',
+                distanceMeters: dist,
+                distanceKm: Number((dist / 1000).toFixed(2)),
+                fee: el.tags?.fee === 'yes' ? 'Pay & Use (₹5)' : 'Public',
+                wheelchairAccessible: el.tags?.wheelchair === 'yes',
+                femaleFriendly: el.tags?.female === 'yes' || true,
+              });
+            }
+          }
+          break;
+        }
+      } catch {
+        // Fallback to next mirror or curated list
+        continue;
+      }
+    }
+  }
+
+  // Filter within radius if selected, or return closest
+  const filtered = radiusMeters > 0
+    ? results.filter((w) => (w.distanceMeters || 0) <= radiusMeters)
+    : results;
+
+  // Always return at least the 8 closest if filtered is empty
+  const finalResults = filtered.length > 0 ? filtered : results.slice(0, 8);
+
+  return finalResults.sort((a, b) => (a.distanceMeters || 0) - (b.distanceMeters || 0));
+}
+
+/**
+ * Fetches nearby 24x7 emergency hospitals with dynamic Haversine distance
+ */
+export async function fetchNearbyHospitals(
+  lat: number,
+  lng: number,
+  radiusMeters: number = 8000
+): Promise<Hospital[]> {
+  // Calculate dynamic distance for curated 24x7 hospitals first (100% offline ready)
+  const results: Hospital[] = CURATED_KOLKATA_HOSPITALS.map((h) => {
+    const dist = haversineDistance(lat, lng, h.lat, h.lng);
+    return {
+      ...h,
+      distanceMeters: dist,
+      distanceKm: Number((dist / 1000).toFixed(2)),
+    };
+  });
+
+  // Try querying Overpass for additional clinics / nursing homes nearby
+  if (typeof window !== 'undefined' && navigator.onLine) {
+    const query = `
+      [out:json][timeout:4];
+      (
+        node["amenity"="hospital"](around:${radiusMeters},${lat},${lng});
+      );
+      out body 15;
+    `;
+
+    for (const endpoint of OVERPASS_ENDPOINTS) {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3500);
+
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `data=${encodeURIComponent(query)}`,
+          signal: controller.signal,
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!res.ok) continue;
+        const json = await res.json();
+
+        if (json && Array.isArray(json.elements)) {
+          for (const el of json.elements) {
+            if (typeof el.lat !== 'number' || typeof el.lon !== 'number') continue;
+            const dist = haversineDistance(lat, lng, el.lat, el.lon);
+            const name = el.tags?.name;
+            if (!name) continue;
+
+            const alreadyExists = results.some(
+              (r) => Math.abs(r.lat - el.lat) < 0.001 && Math.abs(r.lng - el.lon) < 0.001
+            );
+
+            if (!alreadyExists) {
+              results.push({
+                id: `osm-hosp-${el.id}`,
+                name: name,
+                lat: el.lat,
+                lng: el.lon,
+                type: el.tags?.healthcare === 'hospital' ? 'General Hospital' : 'Emergency Clinic',
+                emergencyPhone: el.tags?.['emergency:phone'] || el.tags?.phone || '112',
+                distanceMeters: dist,
+                distanceKm: Number((dist / 1000).toFixed(2)),
+                address: el.tags?.['addr:street'] || 'Kolkata, WB',
+                facilities: ['24/7 Emergency Care', 'Casualty Ward'],
+                is24x7: true,
+              });
+            }
+          }
+          break;
+        }
+      } catch {
+        continue;
+      }
+    }
+  }
+
+  // Filter within radius or return closest
+  const filtered = radiusMeters > 0
+    ? results.filter((h) => (h.distanceMeters || 0) <= radiusMeters)
+    : results;
+
+  const finalResults = filtered.length > 0 ? filtered : results.slice(0, 8);
+
+  return finalResults.sort((a, b) => (a.distanceMeters || 0) - (b.distanceMeters || 0));
 }

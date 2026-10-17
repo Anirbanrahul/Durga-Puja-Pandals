@@ -62,5 +62,36 @@ export interface EmergencyContact {
   urgent?: boolean;
 }
 
+export interface Washroom {
+  id: string | number;
+  name: string;
+  lat: number;
+  lng: number;
+  type: 'Mall Washroom' | 'Metro Station' | 'Public / Sulabh' | 'Petrol Pump' | string;
+  distanceMeters?: number;
+  distanceKm?: number;
+  address?: string;
+  fee?: string;
+  wheelchairAccessible?: boolean;
+  femaleFriendly?: boolean;
+  hasDiaperChanging?: boolean;
+}
+
+export interface Hospital {
+  id: string | number;
+  name: string;
+  lat: number;
+  lng: number;
+  type: 'Government Apex' | 'Private Multispeciality' | 'Cardiac Emergency' | 'General Hospital' | string;
+  emergencyPhone: string;
+  ambulancePhone?: string;
+  distanceMeters?: number;
+  distanceKm?: number;
+  address?: string;
+  facilities?: string[];
+  is24x7: boolean;
+}
+
+export type AppTab = 'pandals' | 'map' | 'restaurants' | 'washrooms' | 'hospitals';
 export type RadiusFilter = 500 | 1000 | 3000 | 5000 | 10000 | 0;
 export type SortOption = 'distance' | 'alphabetical' | 'zone';
